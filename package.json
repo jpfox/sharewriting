@@ -25,9 +25,11 @@
   },
   "homepage": "https://sharewriting.net/",
   "dependencies": {
-    "jquery": "^2.2.4",
     "bootstrap": "^3.3.7",
     "ckeditor": "^4.6.2",
+    "express": "^4.15.2",
+    "jdenticon": "^1.4.0",
+    "jquery": "^2.2.4",
     "tweetnacl": "^1.0.0",
     "tweetnacl-util": "^0.15.0"
   }
