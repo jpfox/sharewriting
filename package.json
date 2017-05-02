@@ -4,7 +4,8 @@
   "description": "Application server to share writing according to pseudonymity",
   "main": "sharewriting.js",
   "scripts": {
-    "start": "node sharewriting.js"
+    "start": "node sharewriting.js",
+    "postinstall": "git clone http://github.com/nmmf/imageresize.git ckeditor-extra-plugins/imageresize && git clone http://github.com/nmmf/base64image.git ckeditor-extra-plugins/base64image"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "url": "https://github.com/jpfox/sharewriting/issues"
   },
   "homepage": "https://sharewriting.net/",
+  "config" : { "port" : "4984" },
   "dependencies": {
     "bootstrap": "^3.3.7",
     "ckeditor": "^4.6.2",

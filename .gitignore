@@ -39,3 +39,6 @@ jspm_packages
 # testing stuff
 testing-stuff
 
+# downloaded ckeditor plugins
+ckeditor-extra-plugins
+
