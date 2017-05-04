@@ -76,15 +76,16 @@ function ShareWritingClass() {
 		html += '<address class="author">By ' + writing.article.author + ' / ' + writing.article.pubkey + '</address>';
 		html += '<time pubdate datetime="' + pubdate.toISOString() + '" title="' + pubdate.toDateString()  + '">On ' + pubdate.toDateString() + '</time>';
 		html += '</div>';
-		if(rTags.length>0) {
+		if(rTags.length>0 && rTags[0]!=='') {
 			html += '<ul class="tags">';
 			for (i = 0; i < rTags.length; i++) {
-				html += '<li class="tag"> #' + rTags[i] + '</li>';
+				if(rTags[i]!=='')
+					html += '<li class="tag"> #' + rTags[i] + '</li>';
 			}
 			html += '</ul>';
 		}
 		html += '</header>';
-		html += '<div class="article-content">' + writing.article.body + '</div>';
+		html += '<div class="article-content">' +  markdown.toHTML(writing.article.body) + '</div>';
 		html += '<footer>';
 		html += '<div class="signature">' + writing.signature + '</div>';
 		html += '</footer>';
@@ -101,49 +102,11 @@ $(function(){
 	/* user lang */
 	var userLang = navigator.language || navigator.userLanguage;
 	$('#sw_lang').val(userLang);
-
-	// CKEDITOR.config.language = userLang;
-	CKEDITOR.plugins.addExternal( 'imageresize', '../ckeditor-extra-plugins/imageresize/' );
-	CKEDITOR.plugins.addExternal( 'base64image', '../ckeditor-extra-plugins/base64image/' );
-
-	var sw_editor = CKEDITOR.replace( 'sw_editor', {
-		toolbarGroups: [
-			{ name: 'styles', groups: [ 'styles' ] },
-			{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-			{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
-			{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-			{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
-			{ name: 'links', groups: [ 'links' ] },
-			{ name: 'insert', groups: [ 'insert' ] },
-			{ name: 'forms', groups: [ 'forms' ] },
-			{ name: 'tools', groups: [ 'tools' ] },
-			{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-			{ name: 'others', groups: [ 'others' ] },
-			{ name: 'colors', groups: [ 'colors' ] },
-			{ name: 'about', groups: [ 'about' ] }
-		],
-		removeButtons: 'Cut,Copy,Paste,PasteText,PasteFromWord,Scayt,Maximize,Undo,Redo,Styles,About,Image,SpecialChar',
-		extraPlugins: 'dialogadvtab,tableresize,tabletools,imageresize,base64image',
-		removeDialogTabs : 'image:advanced;link:advanced;table:advanced',
-		format_tags: 'p;h2;h3;h4;h5;h6;pre',
-		forcePasteAsPlainText: true,
-		width: '100%',
-		height: '400',
-		contentsCss: [ '../bootstrap/css/bootstrap.min.css' ],
-		defaultLanguage: 'en',
-		language: userLang,
-		imageResize: []
-		//imageResize.maxWidth: 200,
-		//imageResize.maxHeight: 10000
-	} );
-		
 	$('#sw_lang').change(function(){
 		var userLang = $('#sw_lang').val();
-		var html = CKEDITOR.instances.sw_editor.getData();
-		CKEDITOR.instances.sw_editor.destroy();
-		CKEDITOR.replace( 'sw_editor' );
-		CKEDITOR.config.language = userLang;
-		CKEDITOR.instances.sw_editor.setData(html);
+		var mdown = $('#sw_editor').val();
+		// TODO : change editor lang
+		$('#sw_lang').val(mdown);
 	});
 
 	/* discard alert message */
@@ -206,7 +169,7 @@ $(function(){
 			'title': $('#sw_title').val(),
 			'lang': $('#sw_lang').val(),
 			'tags': $('#sw_tags').val(),
-			'body': CKEDITOR.instances.sw_editor.getData()
+			'body': $('#sw_editor').val()
 		};
 		var signature = ShareWriting.getSignature(JSON.stringify(article));
 		if(signature!==false) {

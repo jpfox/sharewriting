@@ -24,10 +24,9 @@ var app = express();
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use('/jdenticon', express.static(__dirname + '/node_modules/jdenticon/dist'));
-app.use('/ckeditor', express.static(__dirname + '/node_modules/ckeditor'));
+app.use('/markdown', express.static(__dirname + '/node_modules/markdown/lib'));
 app.use('/tweetnacl', express.static(__dirname + '/node_modules/tweetnacl'));
 app.use('/tweetnacl-util', express.static(__dirname + '/node_modules/tweetnacl-util'));
-app.use('/ckeditor-extra-plugins', express.static(__dirname + '/ckeditor-extra-plugins'));
 
 /* static files */
 app.use('/static', express.static(__dirname + '/static'));
