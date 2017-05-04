@@ -97,7 +97,9 @@ function ShareWritingClass() {
 
 $(function(){
 	/* init input fields */
-	$('input').val('');
+	$('input, textarea').val('');
+	
+	var swMarkdownEditor = new SwMarkdownEditor('#sw_markdown_editor_tb', '#sw_editor');
 	
 	/* user lang */
 	var userLang = navigator.language || navigator.userLanguage;
