@@ -64,6 +64,12 @@ function ShareWritingClass() {
 	this.getFormattedWriting = function(writing) {
 		var pubdate = new Date(writing.article.timestamp);
 		var rTags = writing.article.tags.split(',');
+		var mdbody = writing.article.body;
+		if(writing.article.images && writing.article.images.length>0) {
+			for (i = 0; i < writing.article.images.length; i++) {
+				mdbody = mdbody + "\n[sw_img_"+(i+1)+"]: " + writing.article.images[i];
+			}
+		}
 		var html='<article>';
 		html += '<header>';
 		html += '<canvas class="jdenticon" style="float:right" width="100" height="100"';
@@ -85,7 +91,7 @@ function ShareWritingClass() {
 			html += '</ul>';
 		}
 		html += '</header>';
-		html += '<div class="article-content">' +  markdown.toHTML(writing.article.body) + '</div>';
+		html += '<div class="article-content">' +  markdown.toHTML(mdbody) + '</div>';
 		html += '<footer>';
 		html += '<div class="signature">' + writing.signature + '</div>';
 		html += '</footer>';
@@ -164,6 +170,10 @@ $(function(){
 			$('#alert-error-message').show();
 			return;
 		}
+		var images = [];
+		$( "#sw_images img" ).each(function( index ) {
+			images[index] = $(this).attr('src');
+		});
 		var article = {
 			'author': ShareWriting.author_name,
 			'pubkey': ShareWriting.getPubKey(),
@@ -171,7 +181,8 @@ $(function(){
 			'title': $('#sw_title').val(),
 			'lang': $('#sw_lang').val(),
 			'tags': $('#sw_tags').val(),
-			'body': $('#sw_editor').val()
+			'body': $('#sw_editor').val(),
+			'images': images
 		};
 		var signature = ShareWriting.getSignature(JSON.stringify(article));
 		if(signature!==false) {

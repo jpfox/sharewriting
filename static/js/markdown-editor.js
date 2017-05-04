@@ -92,6 +92,20 @@ function SwMarkdownEditor(toolbarSel, txtareaSel) {
 		this.txtareaElt.focus();
 	};
 
+	this.previewFile = function() {
+		var preview = document.querySelector('img');
+		var file    = document.querySelector('input[type=file]').files[0];
+		var reader  = new FileReader();
+
+		reader.addEventListener("load", function () {
+			preview.src = reader.result;
+		}, false);
+
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+	};
+
 	/** constructor **/
 	
 	var $this = this;
@@ -99,6 +113,8 @@ function SwMarkdownEditor(toolbarSel, txtareaSel) {
 	this.toolbarSel = toolbarSel;
 	this.txtareaSel = txtareaSel;
 	this.txtareaElt = $(txtareaSel).get(0);
+	
+	this.img_counter=0;
 	
 	$(this.toolbarSel + ' .mdedit-h1').click(function(){
 		$this.embedSelectionIn("\n# ", "\n");
@@ -158,14 +174,46 @@ function SwMarkdownEditor(toolbarSel, txtareaSel) {
 	});
 	
 	$(this.toolbarSel + ' .mdedit-a').click(function(){
-		var url = prompt($(this).attr("data-mdedit"), "https://");
+		var url = prompt($(this).attr("data-mdedit-prompt"), "https://");
 		$this.embedSelectionIn('[', ']('+url+')');
 	});
 	
 	$(this.toolbarSel + ' .mdedit-img-url').click(function(){
-		var url = prompt($(this).attr("data-mdedit"), "https://");
-		$this.embedSelectionIn('![', ']('+url+')');
+		var url = prompt($(this).attr("data-mdedit-prompt-1"), "https://");
+		var alt = '';
+		var txt = $this.getSelectedText();
+		if(txt==='')
+			alt = prompt($(this).attr("data-mdedit-prompt-2"), "");
+		$this.embedSelectionIn('\n!['+alt, ']('+url+')\n');
 	});
 
+	$(this.toolbarSel + ' .mdedit-img-data').click(function(){
+		$('#sw_images_panel').show();
+	});
+	
+	$('#sw_img_upload').change(function(){
+		var reader  = new FileReader();
+		$this.img_counter++;
+		$( "#sw_images" ).append( '<div class="col-xs-2 col-sm-1"><div class="thumbnail"><img id="sw_img_'+$this.img_counter+'"/></div></div>' );
+		var elem = $('#sw_img_'+$this.img_counter).get(0);
+		reader.addEventListener("load", function () {
+			elem.src = reader.result;
+		}, false);
+		var file=$('#sw_img_upload').get(0).files[0];
+		if(file) {
+			reader.readAsDataURL(file);
+			$('#sw_img_'+$this.img_counter).click(function(){
+				var alt = '';
+				var txt = $this.getSelectedText();
+				if(txt==='')
+					alt = prompt($($this.toolbarSel + ' .mdedit-img-url').attr("data-mdedit-prompt-2"), "");
+				$this.embedSelectionIn('\n!['+alt, '] [' + $(this).attr('id') + ']\n');
+				$('#sw_images_panel').hide();
+			});
+		} else {
+			$('#sw_img_'+$this.img_counter).remove();
+		}
+		$('#sw_img_upload').val('');
+	});
 }
 
