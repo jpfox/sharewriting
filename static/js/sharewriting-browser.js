@@ -103,19 +103,19 @@ function ShareWritingClass() {
 
 $(function(){
 	/* init input fields */
-	$('input, textarea').val('');
+	$('input, textarea, select').val('');
 	
 	var swMarkdownEditor = new SwMarkdownEditor('#sw_markdown_editor_tb', '#sw_editor');
 	
 	/* user lang */
 	var userLang = navigator.language || navigator.userLanguage;
-	$('#sw_lang').val(userLang);
-	$('#sw_lang').change(function(){
+	$('#sw_lang').val(userLang.slice(0,2));
+	/*$('#sw_lang').change(function(){
 		var userLang = $('#sw_lang').val();
 		var mdown = $('#sw_editor').val();
 		// TODO : change editor lang
-		$('#sw_lang').val(mdown);
-	});
+		$('#sw_editor').val(mdown);
+	});*/
 
 	/* discard alert message */
 	$('button').click(function(){
@@ -171,6 +171,7 @@ $(function(){
 			return;
 		}
 		var images = [];
+		$("body").css("cursor", "progress");
 		$( "#sw_images img" ).each(function( index ) {
 			images[index] = $(this).attr('src');
 		});
@@ -193,14 +194,18 @@ $(function(){
 				'article': article,
 				'signature': signature
 			};
-			console.log(writing);
-			$('#writing-json').val(JSON.stringify(writing));
+			// console.log(writing);
+			// $('#writing-json').val(JSON.stringify(writing));
+			var info = writing.article.images.length + " images\n";
+			info += Math.round(JSON.stringify(writing).length/1024) + " kb\n";
+			$('#writing-json').val(info);
 			var preview = ShareWriting.getFormattedWriting(writing);
 			$('#writing-preview').html(preview);
 			jdenticon.update('#writing-preview canvas.jdenticon');
 			$('#container-preview').show();
 			window.location = '#container-preview';
 		}
+		$("body").css("cursor", "default");
 	});
 	
 });

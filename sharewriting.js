@@ -21,15 +21,15 @@ var express = require('express');
 var app = express();
 
 /* external libraries */
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
-app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
-app.use('/jdenticon', express.static(__dirname + '/node_modules/jdenticon/dist'));
-app.use('/markdown', express.static(__dirname + '/node_modules/markdown/lib'));
-app.use('/tweetnacl', express.static(__dirname + '/node_modules/tweetnacl'));
-app.use('/tweetnacl-util', express.static(__dirname + '/node_modules/tweetnacl-util'));
+app.use('/sharewriting/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
+app.use('/sharewriting/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
+app.use('/sharewriting/jdenticon', express.static(__dirname + '/node_modules/jdenticon/dist'));
+app.use('/sharewriting/markdown', express.static(__dirname + '/node_modules/markdown/lib'));
+app.use('/sharewriting/tweetnacl', express.static(__dirname + '/node_modules/tweetnacl'));
+app.use('/sharewriting/tweetnacl-util', express.static(__dirname + '/node_modules/tweetnacl-util'));
 
 /* static files */
-app.use('/static', express.static(__dirname + '/static'));
+app.use('/sharewriting', express.static(__dirname + '/static'));
 
 /* template engine */
 

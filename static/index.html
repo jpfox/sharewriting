@@ -6,11 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<title>ShareWriting</title>
-	<script type="text/javascript" src="../markdown/markdown.js"></script>
-	<script type="text/javascript" src="../tweetnacl/nacl.min.js"></script>
-	<script type="text/javascript" src="../tweetnacl-util/nacl-util.min.js"></script>
+	<script type="text/javascript" src="markdown/markdown.js"></script>
+	<script type="text/javascript" src="tweetnacl/nacl.min.js"></script>
+	<script type="text/javascript" src="tweetnacl-util/nacl-util.min.js"></script>
 	<!-- Bootstrap -->
-	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -385,21 +385,18 @@
 							<button type="button" class="btn btn-default mdedit-img-url" title="External image url" data-mdedit-prompt-1="Enter external image url :" data-mdedit-prompt-2="Enter alternative description :"><span class="glyphicon glyphicon-picture" aria-label="External image url"></span></button>
 							<button type="button" class="btn btn-default mdedit-img-data" title="Image attach"><span class="glyphicon glyphicon-paperclip" aria-label="Image attach"></span></button>
 						</div>
-					</div>
-					<div class="clearfix"></div>
-					<div id="sw_images_panel" style="display:none;">
-						<div class="row col-xs-6 col-sm-4">
+						<div id="sw_images_panel"  class="btn-group" role="group" aria-label="Image uploader" style="display:none;">
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></span>
 								<input class="form-control" type="file" name="sw_img_upload" id="sw_img_upload" placeholder="Select an image from your medias" />
 							</div>
-						</div>
-						<div id="sw_images">
-							<!--
-							<div class="col-xs-2 col-sm-1">
-								<img />
+							<div id="sw_images" style="float:left;">
+								<!--
+								<div class="">
+									<img />
+								</div>
+								-->
 							</div>
-							-->
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -433,8 +430,8 @@
 						<div class="panel-body thumbnail">
 							<div id="writing-preview"></div>
 							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> JSON source</span>
-								<textarea class="form-control" id="writing-json" rows="12" cols="80"></textarea>
+								<span class="input-group-addon"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Article info</span>
+								<textarea class="form-control" id="writing-json" rows="4" cols="40"></textarea>
 							</div>
 						</div>
 						<div class="panel-footer">
@@ -445,9 +442,9 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="../jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../jdenticon/jdenticon.min.js"></script>
+	<script type="text/javascript" src="jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="jdenticon/jdenticon.min.js"></script>
 	<script type="text/javascript" src="js/markdown-editor.js"></script>
 	<script type="text/javascript" src="js/sharewriting-browser.js"></script>
 </body>

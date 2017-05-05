@@ -140,6 +140,9 @@ function SwMarkdownEditor(toolbarSel, txtareaSel) {
 		$this.embedSelectionIn("\n###### ", "\n");
 	});
 	
+	$(this.toolbarSel + ' .mdedit-p').click(function(){
+		$this.embedSelectionIn("\n", "\n");
+	});
 	
 	$(this.toolbarSel + ' .mdedit-strong').click(function(){
 		$this.embedSelectionIn('**', '**');
@@ -192,21 +195,49 @@ function SwMarkdownEditor(toolbarSel, txtareaSel) {
 	});
 	
 	$('#sw_img_upload').change(function(){
+		var file=$('#sw_img_upload').get(0).files[0];
+		var img = document.createElement("img");
 		var reader  = new FileReader();
 		$this.img_counter++;
-		$( "#sw_images" ).append( '<div class="col-xs-2 col-sm-1"><div class="thumbnail"><img id="sw_img_'+$this.img_counter+'"/></div></div>' );
-		var elem = $('#sw_img_'+$this.img_counter).get(0);
-		reader.addEventListener("load", function () {
-			elem.src = reader.result;
-		}, false);
-		var file=$('#sw_img_upload').get(0).files[0];
+		$( "#sw_images" ).append( '<img id="sw_img_'+$this.img_counter+'" title="'+file.name+'" alt="'+file.name+'" style="max-width:32px;max-height:32px;margin:4px;" />' );
+		reader.onload = function (e) {
+			img.src = e.target.result;
+			img.onload = function () {
+				var elem = $('#sw_img_'+$this.img_counter).get(0);
+				var canvas = document.createElement('canvas');
+				var ctx = canvas.getContext("2d");
+				ctx.drawImage(img, 0, 0);
+				var MAX_WIDTH = 800;
+				var MAX_HEIGHT = 800;
+				var width = img.width;
+				var height = img.height;
+
+				if (width > height) {
+					if (width > MAX_WIDTH) {
+						height *= MAX_WIDTH / width;
+						width = MAX_WIDTH;
+					}
+				} else {
+					if (height > MAX_HEIGHT) {
+						width *= MAX_HEIGHT / height;
+						height = MAX_HEIGHT;
+					}
+				}
+				canvas.width = width;
+				canvas.height = height;
+				ctx = canvas.getContext("2d");
+				ctx.drawImage(img, 0, 0, width, height);
+
+				elem.src = canvas.toDataURL("image/jpeg",0.8);
+			};
+		};
 		if(file) {
 			reader.readAsDataURL(file);
 			$('#sw_img_'+$this.img_counter).click(function(){
 				var alt = '';
 				var txt = $this.getSelectedText();
 				if(txt==='')
-					alt = prompt($($this.toolbarSel + ' .mdedit-img-url').attr("data-mdedit-prompt-2"), "");
+					alt = prompt($($this.toolbarSel + ' .mdedit-img-url').attr("data-mdedit-prompt-2"), $(this).attr('title'));
 				$this.embedSelectionIn('\n!['+alt, '] [' + $(this).attr('id') + ']\n');
 				$('#sw_images_panel').hide();
 			});
