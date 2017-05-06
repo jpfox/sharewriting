@@ -383,22 +383,12 @@
 							<button type="button" class="btn btn-default mdedit-hr" title="Horizontal rules"><span class="glyphicon glyphicon-minus" aria-label="Horizontal rules"></span></button>
 							<button type="button" class="btn btn-default mdedit-a" title="Link" data-mdedit-prompt="Enter site url :"><span class="glyphicon glyphicon-link" aria-label="Link"></span></button>
 							<button type="button" class="btn btn-default mdedit-img-url" title="External image url" data-mdedit-prompt-1="Enter external image url :" data-mdedit-prompt-2="Enter alternative description :"><span class="glyphicon glyphicon-picture" aria-label="External image url"></span></button>
-							<button type="button" class="btn btn-default mdedit-img-data" title="Image attach"><span class="glyphicon glyphicon-paperclip" aria-label="Image attach"></span></button>
 						</div>
-						<div id="sw_images_panel"  class="btn-group" role="group" aria-label="Image uploader" style="display:none;">
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></span>
-								<input class="form-control" type="file" name="sw_img_upload" id="sw_img_upload" placeholder="Select an image from your medias" />
-							</div>
-							<div id="sw_images" style="float:left;">
-								<!--
-								<div class="">
-									<img />
-								</div>
-								-->
-							</div>
+						<div id="sw_images_panel"  class="btn-group" role="group" aria-label="Image uploader">
+							<button type="button" class="btn btn-default mdedit-img-data" title="Embed image"><span class="glyphicon glyphicon-paperclip" aria-label="Embed image"></span></button>
 						</div>
 					</div>
+					<input class="form-control" type="file" name="sw_img_upload" id="sw_img_upload" placeholder="Select an image from your medias" style="display:none;" />
 					<div class="clearfix"></div>
 					<div class="input-group col-xs-12 col-sm-12">
 						<textarea class="col-xs-12 col-sm-12" name="sw_editor" id="sw_editor" rows="18" cols="80"></textarea>
@@ -435,7 +425,10 @@
 							</div>
 						</div>
 						<div class="panel-footer">
-							<button id="btn-publish" class="btn btn-success" type="button">Publish <span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
+							<div class="btn-group" role="group" aria-label="Validation ?">
+								<button id="btn-reedit" class="btn btn-primary" type="button">Re-edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+								<button id="btn-publish" class="btn btn-success" type="button">Publish <span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -172,7 +172,7 @@ $(function(){
 		}
 		var images = [];
 		$("body").css("cursor", "progress");
-		$( "#sw_images img" ).each(function( index ) {
+		$( "#sw_images_panel img.sw_img_thumb" ).each(function( index ) {
 			images[index] = $(this).attr('src');
 		});
 		var article = {
@@ -197,7 +197,11 @@ $(function(){
 			// console.log(writing);
 			// $('#writing-json').val(JSON.stringify(writing));
 			var info = writing.article.images.length + " images\n";
-			info += Math.round(JSON.stringify(writing).length/1024) + " kb\n";
+			var artsize = JSON.stringify(writing).length;
+			if(artsize<1000)
+				info += artsize + " bits\n";
+			else
+				info += Math.round(artsize/1024) + " kb\n";
 			$('#writing-json').val(info);
 			var preview = ShareWriting.getFormattedWriting(writing);
 			$('#writing-preview').html(preview);
@@ -208,4 +212,14 @@ $(function(){
 		$("body").css("cursor", "default");
 	});
 	
+	/* Re-edit */
+	$('#btn-reedit').click(function(){
+		window.location='#form-publish';
+	});
+	
+	/* publish */
+	$('#btn-publish').click(function(){
+		alert('Not yet implemented !');
+	});
+
 });
