@@ -76,7 +76,7 @@ app.get(config.subfolder, function (req, res) {
 		 }, function(err, out) {
 		res.send(out);
 	});
-})
+});
 
 // listening
 app.listen(config.port, function () {
