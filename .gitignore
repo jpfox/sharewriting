@@ -36,9 +36,9 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+# Production config file
+config.json
+
 # testing stuff
 testing-stuff
-
-# downloaded ckeditor plugins
-ckeditor-extra-plugins
 

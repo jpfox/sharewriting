@@ -108,7 +108,7 @@ $(function(){
 	var swMarkdownEditor = new SwMarkdownEditor('#sw_markdown_editor_tb', '#sw_editor');
 	
 	/* user lang */
-	var userLang = navigator.language || navigator.userLanguage;
+	var userLang = default_lang; // navigator.language || navigator.userLanguage;
 	$('#sw_lang').val(userLang.slice(0,2));
 	/*$('#sw_lang').change(function(){
 		var userLang = $('#sw_lang').val();

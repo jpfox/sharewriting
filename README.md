@@ -27,8 +27,9 @@ Articles can be moderated and used to produce a public feed in different format 
     # install dependencies
     npm install
     
-    # to change default port from 4984 to 8080 for example :
-    npm config set sharewriting:port 8080
+    # to change default port, folder application, proposed languages...
+    cp config.json.sample config.json
+    nano config.json
     
     # Run
     npm start

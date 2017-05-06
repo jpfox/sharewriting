@@ -1,0 +1,26 @@
+/** 
+ *
+ * Copy and adapt json fragment in config.json (without comments)
+ *
+ * "port":
+ *    Listen on port
+ *
+ * "subfolder":
+ *    subfolder if application is not on web site root ("/" if on root)
+ *
+ * "languages":
+ *    Languages proposed to author for redacting articles
+ *    see ISO-639-1 specifications to have list
+ *    https://github.com/meikidd/iso-639-1/blob/master/src/data.js
+ *
+ * "default_lang":
+ *    Default language if auto detected from browser if not available
+ *
+ **/
+
+{
+	"port": 4984,
+	"subfolder": "/sharewriting/",
+	"languages": "de en es fr"
+	"default_lang": "en",
+}
