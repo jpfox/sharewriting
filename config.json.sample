@@ -1,12 +1,18 @@
 /** 
  *
- * Copy and adapt json fragment in config.json (without comments)
+ * Copy and adapt json fragment in config.json
+ * and remove this block comment
  *
  * "port":
  *    Listen on port
  *
  * "subfolder":
  *    subfolder if application is not on web site root ("/" if on root)
+ *
+ * "any_db_url":
+ *    adapter://user:password@host/database
+ *    adapter could be mysql, postqres, sqlite3 or mssql
+ *    see https://github.com/grncdr/node-any-db#api
  *
  * "languages":
  *    Languages proposed to author for redacting articles
@@ -17,10 +23,10 @@
  *    Default language if auto detected from browser if not available
  *
  **/
-
 {
 	"port": 4984,
 	"subfolder": "/sharewriting/",
-	"languages": "de en es fr"
+	"any_db_url": "sqlite3://sw.db",
+	"languages": "de en es fr",
 	"default_lang": "en",
 }

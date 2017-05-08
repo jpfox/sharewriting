@@ -14,6 +14,7 @@ var ISO6391	= require('iso-639-1');
 var express	= require('express');
 var fs		= require('fs');
 var dust	= require('dustjs-linkedin');
+var db		= require('any-db');
 
 /***
  * 
@@ -25,12 +26,7 @@ try {
 	config = require( __dirname + "/config.json");
 } catch(ex) {
 	console.log(ex.message);
-	config = {
-		port: 4984,
-		subfolder: "/sharewriting/",
-		default_lang: "en",
-		languages: "de en es fr"
-	};
+	console.log("Copy config.json.sample to config.json and adapt it");
 }
 
 if(config.port*1<=0) {

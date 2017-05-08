@@ -27,13 +27,22 @@ Articles can be moderated and used to produce a public feed in different format 
     # install dependencies
     npm install
     
-    # to change default port, folder application, proposed languages...
+    # install node-any-db adapter according to database choice
+    npm install any-db-postgres
+    npm install any-db-mysql
+    npm install any-db-sqlite3
+    npm install any-db-mssql
+    
+    # to change default port, folder application, db settings, proposed languages...
     cp config.json.sample config.json
     nano config.json
     
     # Run
     npm start
-
+    # or
+    node sharewriting
+    
+More inf* about [node-any-db](https://github.com/grncdr/node-any-db).
 
 ## Security
 
