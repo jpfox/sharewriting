@@ -84,11 +84,22 @@ function SwMarkdownEditor(toolbarSel, txtareaSel) {
 		}
 	};
 	
-	this.embedSelectionIn = function(startTag, endTag) {
+	this.embedSelectionIn = function(startTag, endTag, bEachLine) {
 		var sel = this.getInputSelection();
 		var seltxt = this.getSelectedText();
-		$this.replaceSelectedText(startTag + seltxt + endTag);
-		$this.setSelectionRange(sel.start+startTag.length, sel.end+startTag.length);
+		if(bEachLine) {
+			var rLines = seltxt.split("\n");
+			var newtxt='';
+			for(i=0; i<rLines.length; i++)
+				if(i>0 || rLines[i].length>0)
+					newtxt += startTag + rLines[i];
+			newtxt += endTag;
+			$this.replaceSelectedText(newtxt);
+			$this.setSelectionRange(sel.start, sel.start+newtxt.length);
+		} else {
+			$this.replaceSelectedText(startTag + seltxt + endTag);
+			$this.setSelectionRange(sel.start+startTag.length, sel.end+startTag.length);
+		}
 		this.txtareaElt.focus();
 	};
 
@@ -153,21 +164,21 @@ function SwMarkdownEditor(toolbarSel, txtareaSel) {
 	});
 	
 	$(this.toolbarSel + ' .mdedit-ul').click(function(){
-		$this.embedSelectionIn("\n- ", "\n");
+		$this.embedSelectionIn("\n- ", "\n", true);
 	});
 	
 	$(this.toolbarSel + ' .mdedit-ol').click(function(){
-		$this.embedSelectionIn("\n1. ", "\n");
+		$this.embedSelectionIn("\n1. ", "\n", true);
 	});
 	
 	$(this.toolbarSel + ' .mdedit-cite').click(function(){
-		$this.embedSelectionIn("\n> ", "\n");
+		$this.embedSelectionIn("\n> ", "\n", true);
 	});
 	
 	$(this.toolbarSel + ' .mdedit-pre').click(function(){
 		var txt = $this.getSelectedText();
 		if(txt.match(/\r|\n/) || txt==='')
-			$this.embedSelectionIn("\n\n    ", "\n");
+			$this.embedSelectionIn("\n    ", "\n", true);
 		else
 			$this.embedSelectionIn("``", "``");
 	});

@@ -30,7 +30,7 @@ function ShareWritingClass() {
 	};
 	
 	/**
-	 * convert base64 encoded strinf to base36 encoded string
+	 * convert base64 encoded string to hex encoded string
 	 */
 	this.b64toHex = function(s64) {
 		return this.toHex(nacl.util.decodeBase64(s64));
