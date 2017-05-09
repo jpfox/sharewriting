@@ -27,6 +27,6 @@
 	"port": 4984,
 	"subfolder": "/sharewriting/",
 	"any_db_url": "sqlite3://sw.db",
-	"languages": "de en es fr",
-	"default_lang": "en",
+	"languages": "de en es fr it",
+	"default_lang": "en"
 }
