@@ -60,18 +60,30 @@ app.use(config.subfolder + 'tweetnacl-util', express.static(__dirname + '/node_m
 // static files
 app.use(config.subfolder, express.static(__dirname + '/static'));
 
-// template engine
+// load dust templates
+fs.readdir(__dirname + '/views/', function(err, files) {
+	for(var i=0; i<files.length; i++) {
+		var src = fs.readFileSync(__dirname + '/views/' + files[0], 'utf8');
+		var filenamechunk = files[0].split('.');
+		var compiled = dust.compile(src, filenamechunk[0]);
+		dust.loadSource(compiled);
+	}
+});
+
+
+// / (edit by default)
 app.get(config.subfolder, function (req, res) {
 	// Edition
-	var src = fs.readFileSync(__dirname + '/views/edit.dust.html', 'utf8');
-	var compiled = dust.compile(src, 'edit');
-	dust.loadSource(compiled);
 	dust.render('edit', {
 			langLabels: langLabels,
 			default_lang: config.default_lang
 		 }, function(err, out) {
 		res.send(out);
 	});
+});
+
+app.post(config.subfolder + 'publish', function (req, res) {
+	res.send('{result:"ok"}');
 });
 
 // listening

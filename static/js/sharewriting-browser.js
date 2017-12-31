@@ -195,14 +195,14 @@ $(function(){
 				'signature': signature
 			};
 			// console.log(writing);
-			// $('#writing-json').val(JSON.stringify(writing));
+			$('#writing-json').val(JSON.stringify(writing));
 			var info = writing.article.images.length + " images\n";
 			var artsize = JSON.stringify(writing).length;
 			if(artsize<1000)
 				info += artsize + " bits\n";
 			else
 				info += Math.round(artsize/1024) + " kb\n";
-			$('#writing-json').val(info);
+			$('#writing-info').html(info);
 			var preview = ShareWriting.getFormattedWriting(writing);
 			$('#writing-preview').html(preview);
 			jdenticon.update('#writing-preview canvas.jdenticon');
